@@ -5,9 +5,9 @@ import java.util.UUID;
 public class ContratAuto {
     private Montant cotisationAnnuelle;
 
-    private final CouvertureAssurantielle couvertureAssurantielle;
-    private final Vehicule vehicule;
-    private final ConducteurPrincipal conducteurPrincipal;
+    private CouvertureAssurantielle couvertureAssurantielle;
+    private Vehicule vehicule;
+    private ConducteurPrincipal conducteurPrincipal;
     private final String id;
 
     public ContratAuto(CouvertureAssurantielle couvertureAssurantielle, Vehicule vehicule,
@@ -27,6 +27,14 @@ public class ContratAuto {
                 .appliqueCoefficient(conducteurPrincipal);
     }
 
+    public void miseAJour(CouvertureAssurantielle couvertureAssurantielle, Vehicule vehicule,
+                ConducteurPrincipal conducteurPrincipal) {
+        this.couvertureAssurantielle = couvertureAssurantielle;
+        this.vehicule = vehicule;
+        this.conducteurPrincipal = conducteurPrincipal;
+        this.cotisationAnnuelle = calculerCotisationAnnuelle();
+    }
+
     public Montant getCotisationAnnuelle() {
         return cotisationAnnuelle;
     }
@@ -35,4 +43,15 @@ public class ContratAuto {
         return id;
     }
 
+    public CouvertureAssurantielle getCouvertureAssurantielle() {
+        return couvertureAssurantielle;
+    }
+
+    public Vehicule getVehicule() {
+        return vehicule;
+    }
+
+    public ConducteurPrincipal getConducteurPrincipal() {
+        return conducteurPrincipal;
+    }
 }

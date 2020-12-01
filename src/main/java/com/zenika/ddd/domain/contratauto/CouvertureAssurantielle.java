@@ -14,4 +14,7 @@ public class CouvertureAssurantielle {
         return montantForfaitaire;
     }
 
+    public String getId() {
+        return id;
+    }
 }

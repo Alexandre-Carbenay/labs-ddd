@@ -19,8 +19,8 @@ public class ContratAutoTest {
                                        Coefficient coefficientConducteurPrincipal,
                                        Montant cotisationAnnuelle) {
         CouvertureAssurantielle couvertureAssurantielle = new CouvertureAssurantielle("ca123", montantForfaitaire);
-
-        Vehicule vehicule = new Vehicule(classeVehicule);
+        String immatriculation = "aa-123-aa";
+        Vehicule vehicule = new Vehicule(immatriculation, classeVehicule);
         ConducteurPrincipal conducteurPrincipal = new ConducteurPrincipal(coefficientConducteurPrincipal);
 
         ContratAuto contratAuto = new ContratAuto(couvertureAssurantielle, vehicule, conducteurPrincipal);

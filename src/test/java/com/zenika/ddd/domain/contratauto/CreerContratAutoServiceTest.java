@@ -20,7 +20,7 @@ public class CreerContratAutoServiceTest {
         CouvertureAssurantielle couvertureAssurantielle = new CouvertureAssurantielle(idCouvertureAssurantielle, Montant.euros(100.0));
         given(couvertureAssurantielleGateway.findById(idCouvertureAssurantielle)).willReturn(couvertureAssurantielle);
 
-        Vehicule vehicule = new Vehicule(ClasseVehicule.MOYEN);
+        Vehicule vehicule = new Vehicule(immatriculation, ClasseVehicule.MOYEN);
         given(vehiculeGateway.findByImmatriculation(immatriculation)).willReturn(vehicule);
 
         CreerContratAutoService service = new CreerContratAutoService(couvertureAssurantielleGateway, vehiculeGateway, contratAutoRepository);
