@@ -3,14 +3,14 @@ package com.zenika.ddd.domain.contratauto;
 public class CouvertureAssurantielle {
 
     private String id;
-    private double montantForfaitaire;
+    private Montant montantForfaitaire;
 
-    public CouvertureAssurantielle(String id, double montantForfaitaire) {
+    public CouvertureAssurantielle(String id, Montant montantForfaitaire) {
         this.id = id;
         this.montantForfaitaire = montantForfaitaire;
     }
 
-    public double getMontantForfaitaire() {
+    public Montant getMontantForfaitaire() {
         return montantForfaitaire;
     }
 

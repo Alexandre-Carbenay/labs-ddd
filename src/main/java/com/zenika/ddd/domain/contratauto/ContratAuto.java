@@ -1,26 +1,29 @@
 package com.zenika.ddd.domain.contratauto;
 
 public class ContratAuto {
+    private Montant cotisationAnnuelle;
 
-    private double cotisationAnnuelle;
+    private final CouvertureAssurantielle couvertureAssurantielle;
     private final Vehicule vehicule;
+    private final ConducteurPrincipal conducteurPrincipal;
 
-    public ContratAuto(CouvertureAssurantielle couvertureAssurantielle, Vehicule vehicule) {
+    public ContratAuto(CouvertureAssurantielle couvertureAssurantielle, Vehicule vehicule,
+                       ConducteurPrincipal conducteurPrincipal) {
+        this.couvertureAssurantielle = couvertureAssurantielle;
         this.vehicule = vehicule;
-        this.cotisationAnnuelle = calculerCotisationAnnuelle(couvertureAssurantielle);
+        this.conducteurPrincipal = conducteurPrincipal;
+        this.cotisationAnnuelle = calculerCotisationAnnuelle();
     }
 
-    private double calculerCotisationAnnuelle(CouvertureAssurantielle couvertureAssurantielle) {
-        double cotisationAnnuelle;
-
+    public Montant calculerCotisationAnnuelle() {
         ClasseVehicule classeVehicule = this.vehicule.getClasse();
 
-        cotisationAnnuelle = couvertureAssurantielle.getMontantForfaitaire() * classeVehicule.getCoefficient();
-        return cotisationAnnuelle;
+        return couvertureAssurantielle.getMontantForfaitaire()
+                .appliqueCoefficient(classeVehicule)
+                .appliqueCoefficient(conducteurPrincipal);
     }
 
-    public double getCotisationAnnuelle() {
+    public Montant getCotisationAnnuelle() {
         return cotisationAnnuelle;
     }
-
 }

@@ -1,16 +1,17 @@
 package com.zenika.ddd.domain.contratauto;
 
-public enum ClasseVehicule {
+public enum ClasseVehicule implements EstUnCoefficient {
 
     BAS(1), MOYEN(2), HAUT(3);
 
-    private final double coefficient;
+    private final Coefficient coefficient;
 
-    ClasseVehicule(double coefficient) {
-        this.coefficient = coefficient;
+    ClasseVehicule(double valeur) {
+        this.coefficient = Coefficient.of(valeur);
     }
 
-    public double getCoefficient() {
-        return coefficient;
+    @Override
+    public double getValeur() {
+        return coefficient.getValeur();
     }
 }
