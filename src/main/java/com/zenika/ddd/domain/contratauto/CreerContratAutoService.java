@@ -12,11 +12,10 @@ public class CreerContratAutoService {
     }
 
     public ContratAuto creerContrat(String idCouvertureAssurantielle, String immatriculation, ConducteurPrincipal conducteurPrincipal) {
+        CouvertureAssurantielle couvertureAssurantielle = couvertureAssurantielleGateway.findById(idCouvertureAssurantielle);
+        Vehicule vehicule = vehiculeGateway.findByImmatriculation(immatriculation);
 
-        var couvertureAssurantielle = couvertureAssurantielleGateway.findById(idCouvertureAssurantielle);
-        var vehicule = vehiculeGateway.findByImmatriculation(immatriculation);
-
-        var contratAuto = new ContratAuto(couvertureAssurantielle, vehicule, conducteurPrincipal);
+        ContratAuto contratAuto = new ContratAuto(couvertureAssurantielle, vehicule, conducteurPrincipal);
 
         contratAutoRepository.save(contratAuto);
 
