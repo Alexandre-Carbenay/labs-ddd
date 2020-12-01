@@ -3,15 +3,15 @@ package com.zenika.ddd.domain.contratauto;
 public class CouvertureAssurantielle {
 
     private String id;
-    private double tarif;
+    private double montantForfaitaire;
 
-    public CouvertureAssurantielle(String id, double tarif) {
+    public CouvertureAssurantielle(String id, double montantForfaitaire) {
         this.id = id;
-        this.tarif = tarif;
+        this.montantForfaitaire = montantForfaitaire;
     }
 
-    public double getTarif() {
-        return tarif;
+    public double getMontantForfaitaire() {
+        return montantForfaitaire;
     }
 
 }
