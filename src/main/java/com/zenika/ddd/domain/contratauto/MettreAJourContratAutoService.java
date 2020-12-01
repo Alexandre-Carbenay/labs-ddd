@@ -1,5 +1,8 @@
 package com.zenika.ddd.domain.contratauto;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class MettreAJourContratAutoService {
 
     private final CouvertureAssurantielleGateway couvertureAssurantielleGateway;
@@ -12,7 +15,7 @@ public class MettreAJourContratAutoService {
         this.contratAutoRepository = contratAutoRepository;
     }
 
-    void mettreAJourContrat(ContratAutoId idContrat) {
+    public void mettreAJourContrat(ContratAutoId idContrat) {
         ContratAuto contrat = contratAutoRepository.findById(idContrat);
         CouvertureAssurantielle couvertureAssurantielle = couvertureAssurantielleGateway.findById(contrat.getCouvertureAssurantielle().getId());
         Vehicule vehicule = vehiculeGateway.findByImmatriculation(contrat.getVehicule().getImmatriculation());

@@ -1,5 +1,8 @@
 package com.zenika.ddd.domain.contratauto;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class CreerContratAutoService {
     private final CouvertureAssurantielleGateway couvertureAssurantielleGateway;
     private final VehiculeGateway vehiculeGateway;
