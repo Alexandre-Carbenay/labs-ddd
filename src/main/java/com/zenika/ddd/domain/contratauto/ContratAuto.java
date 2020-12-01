@@ -1,25 +1,25 @@
 package com.zenika.ddd.domain.contratauto;
 
-import java.util.UUID;
+import java.util.Objects;
 
 public class ContratAuto {
-    private Montant cotisationAnnuelle;
 
+    private final ContratAutoId id;
+    private Montant cotisationAnnuelle;
     private CouvertureAssurantielle couvertureAssurantielle;
     private Vehicule vehicule;
     private ConducteurPrincipal conducteurPrincipal;
-    private final String id;
 
-    public ContratAuto(CouvertureAssurantielle couvertureAssurantielle, Vehicule vehicule,
-                       ConducteurPrincipal conducteurPrincipal) {
-        this.id = "1";
+    public ContratAuto(ContratAutoId id, CouvertureAssurantielle couvertureAssurantielle,
+                       Vehicule vehicule, ConducteurPrincipal conducteurPrincipal) {
+        this.id = id;
         this.couvertureAssurantielle = couvertureAssurantielle;
         this.vehicule = vehicule;
         this.conducteurPrincipal = conducteurPrincipal;
         this.cotisationAnnuelle = calculerCotisationAnnuelle();
     }
 
-    public Montant calculerCotisationAnnuelle() {
+    private Montant calculerCotisationAnnuelle() {
         ClasseVehicule classeVehicule = this.vehicule.getClasse();
 
         return couvertureAssurantielle.getMontantForfaitaire()
@@ -28,19 +28,19 @@ public class ContratAuto {
     }
 
     public void miseAJour(CouvertureAssurantielle couvertureAssurantielle, Vehicule vehicule,
-                ConducteurPrincipal conducteurPrincipal) {
+                          ConducteurPrincipal conducteurPrincipal) {
         this.couvertureAssurantielle = couvertureAssurantielle;
         this.vehicule = vehicule;
         this.conducteurPrincipal = conducteurPrincipal;
         this.cotisationAnnuelle = calculerCotisationAnnuelle();
     }
 
-    public Montant getCotisationAnnuelle() {
-        return cotisationAnnuelle;
+    public ContratAutoId getId() {
+        return id;
     }
 
-    public String getId() {
-        return id;
+    public Montant getCotisationAnnuelle() {
+        return cotisationAnnuelle;
     }
 
     public CouvertureAssurantielle getCouvertureAssurantielle() {
@@ -53,5 +53,18 @@ public class ContratAuto {
 
     public ConducteurPrincipal getConducteurPrincipal() {
         return conducteurPrincipal;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ContratAuto that = (ContratAuto) o;
+        return Objects.equals(id, that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

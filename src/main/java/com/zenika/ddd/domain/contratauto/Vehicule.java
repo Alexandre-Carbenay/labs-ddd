@@ -1,11 +1,13 @@
 package com.zenika.ddd.domain.contratauto;
 
+import java.util.Objects;
+
 public class Vehicule {
 
     private final ClasseVehicule classe;
-    private final String immatriculation;
+    private final Immatriculation immatriculation;
 
-    public Vehicule(String immatriculation, ClasseVehicule classeVehicule) {
+    public Vehicule(Immatriculation immatriculation, ClasseVehicule classeVehicule) {
         this.immatriculation = immatriculation;
         this.classe = classeVehicule;
     }
@@ -14,7 +16,21 @@ public class Vehicule {
         return classe;
     }
 
-    public String getImmatriculation() {
+    public Immatriculation getImmatriculation() {
         return immatriculation;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Vehicule vehicule = (Vehicule) o;
+        return classe == vehicule.classe &&
+                Objects.equals(immatriculation, vehicule.immatriculation);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(classe, immatriculation);
     }
 }

@@ -18,12 +18,11 @@ public class ContratAutoTest {
                                        ClasseVehicule classeVehicule,
                                        Coefficient coefficientConducteurPrincipal,
                                        Montant cotisationAnnuelle) {
-        CouvertureAssurantielle couvertureAssurantielle = new CouvertureAssurantielle("ca123", montantForfaitaire);
-        String immatriculation = "aa-123-aa";
-        Vehicule vehicule = new Vehicule(immatriculation, classeVehicule);
+        CouvertureAssurantielle couvertureAssurantielle = new CouvertureAssurantielle(new CouvertureAssurantielleId("ca123"), montantForfaitaire);
+        Vehicule vehicule = new Vehicule(new Immatriculation("aa-123-aa"), classeVehicule);
         ConducteurPrincipal conducteurPrincipal = new ConducteurPrincipal(coefficientConducteurPrincipal);
 
-        ContratAuto contratAuto = new ContratAuto(couvertureAssurantielle, vehicule, conducteurPrincipal);
+        ContratAuto contratAuto = new ContratAuto(new ContratAutoId("123"), couvertureAssurantielle, vehicule, conducteurPrincipal);
         assertThat(contratAuto.getCotisationAnnuelle()).isEqualTo(cotisationAnnuelle);
     }
 

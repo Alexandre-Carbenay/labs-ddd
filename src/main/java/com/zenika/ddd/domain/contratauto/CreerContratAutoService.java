@@ -11,14 +11,14 @@ public class CreerContratAutoService {
         this.contratAutoRepository = contratAutoRepository;
     }
 
-    public ContratAuto creerContrat(String idCouvertureAssurantielle, String immatriculation, ConducteurPrincipal conducteurPrincipal) {
+    public ContratAuto creerContrat(CouvertureAssurantielleId idCouvertureAssurantielle,
+                                    Immatriculation immatriculation,
+                                    ConducteurPrincipal conducteurPrincipal) {
         CouvertureAssurantielle couvertureAssurantielle = couvertureAssurantielleGateway.findById(idCouvertureAssurantielle);
         Vehicule vehicule = vehiculeGateway.findByImmatriculation(immatriculation);
 
-        ContratAuto contratAuto = new ContratAuto(couvertureAssurantielle, vehicule, conducteurPrincipal);
-
+        ContratAuto contratAuto = new ContratAuto(contratAutoRepository.generateId(), couvertureAssurantielle, vehicule, conducteurPrincipal);
         contratAutoRepository.save(contratAuto);
-
         return contratAuto;
     }
 }

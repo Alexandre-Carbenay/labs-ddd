@@ -12,11 +12,11 @@ public class MettreAJourContratAutoService {
         this.contratAutoRepository = contratAutoRepository;
     }
 
-    void mettreAJourContrat(String idContrat) {
+    void mettreAJourContrat(ContratAutoId idContrat) {
         ContratAuto contrat = contratAutoRepository.findById(idContrat);
         CouvertureAssurantielle couvertureAssurantielle = couvertureAssurantielleGateway.findById(contrat.getCouvertureAssurantielle().getId());
         Vehicule vehicule = vehiculeGateway.findByImmatriculation(contrat.getVehicule().getImmatriculation());
         contrat.miseAJour(couvertureAssurantielle, vehicule, contrat.getConducteurPrincipal());
-
     }
+
 }

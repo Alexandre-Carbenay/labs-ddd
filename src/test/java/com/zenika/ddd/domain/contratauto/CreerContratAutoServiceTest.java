@@ -10,8 +10,8 @@ import static org.mockito.BDDMockito.given;
 public class CreerContratAutoServiceTest {
     @Test
     void testCalculerCotisation() {
-        String idCouvertureAssurantielle = "123";
-        String immatriculation = "aa-123-aa";
+        CouvertureAssurantielleId idCouvertureAssurantielle = new CouvertureAssurantielleId("123");
+        Immatriculation immatriculation = new Immatriculation("aa-123-aa");
 
         CouvertureAssurantielleGateway couvertureAssurantielleGateway = Mockito.mock(CouvertureAssurantielleGateway.class);
         VehiculeGateway vehiculeGateway = Mockito.mock(VehiculeGateway.class);

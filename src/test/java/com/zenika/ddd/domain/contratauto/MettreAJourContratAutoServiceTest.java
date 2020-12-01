@@ -11,15 +11,15 @@ public class MettreAJourContratAutoServiceTest {
 
     @Test
     void testMettreAjourContrat() {
-        String idCouvertureAssurantielle = "123";
-        String immatriculation = "aa-123-aa";
-        String idContrat = "1";
+        CouvertureAssurantielleId idCouvertureAssurantielle = new CouvertureAssurantielleId("123");
+        Immatriculation immatriculation = new Immatriculation("aa-123-aa");
+        ContratAutoId idContrat = new ContratAutoId("1");
 
         CouvertureAssurantielleGateway couvertureAssurantielleGateway = Mockito.mock(CouvertureAssurantielleGateway.class);
         VehiculeGateway vehiculeGateway = Mockito.mock(VehiculeGateway.class);
         ContratAutoRepository contratAutoRepository = new InMemoryContratAutoRepository();
 
-        contratAutoRepository.save(new ContratAuto(new CouvertureAssurantielle(idCouvertureAssurantielle, Montant.euros(100.0)),
+        contratAutoRepository.save(new ContratAuto(idContrat, new CouvertureAssurantielle(idCouvertureAssurantielle, Montant.euros(100.0)),
                 new Vehicule(immatriculation, ClasseVehicule.HAUT), new ConducteurPrincipal(Coefficient.of(0.5))));
 
         CouvertureAssurantielle couvertureAssurantielle = new CouvertureAssurantielle(idCouvertureAssurantielle, Montant.euros(120.0));

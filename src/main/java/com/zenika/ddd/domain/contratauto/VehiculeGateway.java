@@ -1,5 +1,5 @@
 package com.zenika.ddd.domain.contratauto;
 
 public interface VehiculeGateway {
-    Vehicule findByImmatriculation(String immatriculation);
+    Vehicule findByImmatriculation(Immatriculation immatriculation);
 }
