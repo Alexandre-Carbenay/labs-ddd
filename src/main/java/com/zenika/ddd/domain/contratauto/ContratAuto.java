@@ -27,12 +27,14 @@ public class ContratAuto {
                 .appliqueCoefficient(conducteurPrincipal);
     }
 
-    public void miseAJour(CouvertureAssurantielle couvertureAssurantielle, Vehicule vehicule,
+    public CotisationContratAutoMiseAJour miseAJour(CouvertureAssurantielle couvertureAssurantielle, Vehicule vehicule,
                           ConducteurPrincipal conducteurPrincipal) {
         this.couvertureAssurantielle = couvertureAssurantielle;
         this.vehicule = vehicule;
         this.conducteurPrincipal = conducteurPrincipal;
+        Montant ancienneCotisation = cotisationAnnuelle;
         this.cotisationAnnuelle = calculerCotisationAnnuelle();
+        return new CotisationContratAutoMiseAJour(id, ancienneCotisation, cotisationAnnuelle);
     }
 
     public ContratAutoId getId() {
