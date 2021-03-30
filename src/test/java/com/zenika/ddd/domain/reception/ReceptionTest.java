@@ -39,43 +39,90 @@ public class ReceptionTest {
         var entete = new EnteteAvisExpedition("avisExpe1");
         assertThrows(IllegalArgumentException.class, () -> new AvisExpedition(entete, Collections.emptyList()));
     }
-    
+
     @Test
     @DisplayName("Le SKU saisi ne correspond pas � la ligne")
     void skuLigneNonCorrespondant() {
-    
-    	 var entete = new EnteteAvisExpedition("avisExpe1");
-         var sku = new Sku("1234");
-         var lignes = List.of(new Marchandise(sku, 1));
-         var avisExpedition = new AvisExpedition(entete, lignes);
-         
-         var sku2 = new Sku("2163");
-         var marchandise = new Marchandise(sku2, 1);
 
-         var reception = new Reception(new ReceptionId(1), avisExpedition);
+        var entete = new EnteteAvisExpedition("avisExpe1");
+        var sku = new Sku("1234");
+        var lignes = List.of(new Marchandise(sku, 1));
+        var avisExpedition = new AvisExpedition(entete, lignes);
 
-         //reception.ajouterLigne(marchandise);
-         
-         assertThrows(MarchandiseInconnue.class, () -> reception.ajouterLigne(marchandise));
-         
+        var sku2 = new Sku("2163");
+        var marchandise = new Marchandise(sku2, 1);
+
+        var reception = new Reception(new ReceptionId(1), avisExpedition);
+
+        assertThrows(MarchandiseInconnue.class, () -> reception.ajouterLigne(marchandise));
+
     }
-    
-    
+
+
     @Test
     @DisplayName("l'avis d'exp�dition ne contient pas de ligne pour un Sku donn�")
     void avisExpeditionSkuNonValide() {
-        
-    	var entete = new EnteteAvisExpedition("avisExpe1");
+
+        var entete = new EnteteAvisExpedition("avisExpe1");
         var sku = new Sku("12345");
         var lignes = List.of(new Marchandise(sku, 1));
         var avisExpedition = new AvisExpedition(entete, lignes);
-        
+
         var sku2 = new Sku("123456");
         var marchandise = new Marchandise(sku2, 1);
-    	
+
         assertThat(avisExpedition.contientLigne(marchandise)).isFalse();
-        
-    
+
     }
 
+    @Test
+    @DisplayName("Le SKU saisi  correspond  à la ligne")
+    void skuLigneCorrespondant() {
+        String sku_value = "1234";
+        var entete = new EnteteAvisExpedition("avisExpe1");
+        var sku = new Sku(sku_value);
+        var lignes = List.of(new Marchandise(sku, 1));
+        var avisExpedition = new AvisExpedition(entete, lignes);
+
+        var sku2 = new Sku(sku_value);
+        var reception = new Reception(new ReceptionId(1), avisExpedition);
+        var marchendiseAjouter = new Marchandise(sku2, 1);
+
+        reception.ajouterLigne(marchendiseAjouter);
+
+        assertThat(reception.getLignesReception()).contains(marchendiseAjouter);
+
+    }
+
+    @Test
+    @DisplayName("cloturer Une Ligne avec une marchendise manquant")
+    void cloturerUneLigne() {
+        var entete = new EnteteAvisExpedition("avisExpe1");
+        var sku = new Sku("1234");
+        var lignes = List.of(new Marchandise(sku, 1));
+        var avisExpedition = new AvisExpedition(entete, lignes);
+
+        var reception = new Reception(new ReceptionId(1), avisExpedition);
+
+        assertThrows(EcartEnReception.class, () -> reception.cloture());
+    }
+
+    @Test
+    @DisplayName("cloturer Une Ligne ")
+    void cloturerUneLigneAvecSucces() {
+        var entete = new EnteteAvisExpedition("avisExpe1");
+        var sku = new Sku("1234");
+        var lignes = List.of(new Marchandise(sku, 1));
+        var avisExpedition = new AvisExpedition(entete, lignes);
+
+        var reception = new Reception(new ReceptionId(1), avisExpedition);
+
+        var sku2 = new Sku("1234");
+        var marchendiseAjouter = new Marchandise(sku2, 1);
+
+        reception.ajouterLigne(marchendiseAjouter);
+
+        reception.cloture();
+        assertThat(reception.getStatut()).isEqualTo(StatutReception.CLOTURER);
+    }
 }

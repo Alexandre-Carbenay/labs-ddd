@@ -18,8 +18,10 @@ public class AvisExpedition {
     }
 
 	public boolean contientLigne(Marchandise marchandise) {
-		
 		return lignes.stream().anyMatch(ligne -> ligne.avecMemeSku(marchandise.getSKU()));
-		
 	}
+
+    public List<Marchandise> getLignes() {
+        return lignes;
+    }
 }

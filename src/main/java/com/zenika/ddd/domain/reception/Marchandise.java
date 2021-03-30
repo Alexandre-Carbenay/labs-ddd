@@ -1,5 +1,7 @@
 package com.zenika.ddd.domain.reception;
 
+import java.util.Objects;
+
 public class Marchandise {
     private final Sku sku;
     private final int quantite;
@@ -10,14 +12,23 @@ public class Marchandise {
     }
     
     public Sku getSKU() {
-    	
     	return this.sku;
-    	
     }
 
 	public boolean avecMemeSku(Sku sku2) {
-		// TODO Auto-generated method stub
 		return sku.equals(sku2);
 	}
-    
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Marchandise that = (Marchandise) o;
+        return quantite == that.quantite && Objects.equals(sku, that.sku);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(sku, quantite);
+    }
 }
