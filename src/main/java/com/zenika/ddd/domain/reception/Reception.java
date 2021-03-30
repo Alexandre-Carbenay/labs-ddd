@@ -19,4 +19,18 @@ public class Reception {
     public StatutReception getStatut() {
         return statut;
     }
+    
+    public void ajouterLigne(Marchandise marchandise) {
+    	
+    	
+    	if (!this.avisExpedition.contientLigne(marchandise)) {
+    	
+    		throw new MarchandiseInconnue(marchandise.getSKU()); 
+
+    	};
+    	
+    	
+    	
+    }
+    
 }

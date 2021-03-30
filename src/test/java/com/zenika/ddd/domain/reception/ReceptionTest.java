@@ -34,10 +34,48 @@ public class ReceptionTest {
     }
 
     @Test
-    @DisplayName("un avis d'expédition n'est pas valide sans ligne")
+    @DisplayName("un avis d'expedition n'est pas valide sans ligne")
     void avisExpeditionNonValideSansLigne() {
         var entete = new EnteteAvisExpedition("avisExpe1");
         assertThrows(IllegalArgumentException.class, () -> new AvisExpedition(entete, Collections.emptyList()));
+    }
+    
+    @Test
+    @DisplayName("Le SKU saisi ne correspond pas � la ligne")
+    void skuLigneNonCorrespondant() {
+    
+    	 var entete = new EnteteAvisExpedition("avisExpe1");
+         var sku = new Sku("1234");
+         var lignes = List.of(new Marchandise(sku, 1));
+         var avisExpedition = new AvisExpedition(entete, lignes);
+         
+         var sku2 = new Sku("2163");
+         var marchandise = new Marchandise(sku2, 1);
+
+         var reception = new Reception(new ReceptionId(1), avisExpedition);
+
+         //reception.ajouterLigne(marchandise);
+         
+         assertThrows(MarchandiseInconnue.class, () -> reception.ajouterLigne(marchandise));
+         
+    }
+    
+    
+    @Test
+    @DisplayName("l'avis d'exp�dition ne contient pas de ligne pour un Sku donn�")
+    void avisExpeditionSkuNonValide() {
+        
+    	var entete = new EnteteAvisExpedition("avisExpe1");
+        var sku = new Sku("12345");
+        var lignes = List.of(new Marchandise(sku, 1));
+        var avisExpedition = new AvisExpedition(entete, lignes);
+        
+        var sku2 = new Sku("123456");
+        var marchandise = new Marchandise(sku2, 1);
+    	
+        assertThat(avisExpedition.contientLigne(marchandise)).isFalse();
+        
+    
     }
 
 }

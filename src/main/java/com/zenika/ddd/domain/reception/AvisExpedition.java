@@ -16,4 +16,10 @@ public class AvisExpedition {
         this.entete = entete;
         this.lignes = Collections.unmodifiableList(lignes);
     }
+
+	public boolean contientLigne(Marchandise marchandise) {
+		
+		return lignes.stream().anyMatch(ligne -> ligne.avecMemeSku(marchandise.getSKU()));
+		
+	}
 }
