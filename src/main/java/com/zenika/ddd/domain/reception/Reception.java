@@ -39,7 +39,6 @@ public class Reception {
     }
 
     public void cloture() {
-
         if (!lignesReception.containsAll(avisExpedition.getLignes()) ) {
             throw new EcartEnReception();
         }

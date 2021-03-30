@@ -1,9 +1,9 @@
 package com.zenika.ddd.domain.reception;
 
 public class EnteteAvisExpedition {
-    private String idExpedition;
+    private IdExpedition idExpedition;
 
-    public EnteteAvisExpedition(String idExpedition) {
+    public EnteteAvisExpedition(IdExpedition idExpedition) {
         this.idExpedition = idExpedition;
     }
 }

@@ -14,7 +14,7 @@ public class ReceptionTest {
     @Test
     @DisplayName("doit être initialisée à partir de l'avis d'expédition")
     void intialiseAPartirDeLAvisDexpe() {
-        var entete = new EnteteAvisExpedition("avisExpe1");
+        var entete = new EnteteAvisExpedition(new IdExpedition("avisExpe1"));
         var sku = new Sku("1234");
         var lignes = List.of(new Marchandise(sku, 1));
         var avisExpedition = new AvisExpedition(entete, lignes);
@@ -36,7 +36,7 @@ public class ReceptionTest {
     @Test
     @DisplayName("un avis d'expedition n'est pas valide sans ligne")
     void avisExpeditionNonValideSansLigne() {
-        var entete = new EnteteAvisExpedition("avisExpe1");
+        var entete = new EnteteAvisExpedition(new IdExpedition("avisExpe1"));
         assertThrows(IllegalArgumentException.class, () -> new AvisExpedition(entete, Collections.emptyList()));
     }
 
@@ -44,7 +44,7 @@ public class ReceptionTest {
     @DisplayName("Le SKU saisi ne correspond pas � la ligne")
     void skuLigneNonCorrespondant() {
 
-        var entete = new EnteteAvisExpedition("avisExpe1");
+        var entete = new EnteteAvisExpedition(new IdExpedition("avisExpe1"));
         var sku = new Sku("1234");
         var lignes = List.of(new Marchandise(sku, 1));
         var avisExpedition = new AvisExpedition(entete, lignes);
@@ -63,7 +63,7 @@ public class ReceptionTest {
     @DisplayName("l'avis d'exp�dition ne contient pas de ligne pour un Sku donn�")
     void avisExpeditionSkuNonValide() {
 
-        var entete = new EnteteAvisExpedition("avisExpe1");
+        var entete = new EnteteAvisExpedition(new IdExpedition("avisExpe1"));
         var sku = new Sku("12345");
         var lignes = List.of(new Marchandise(sku, 1));
         var avisExpedition = new AvisExpedition(entete, lignes);
@@ -79,7 +79,7 @@ public class ReceptionTest {
     @DisplayName("Le SKU saisi  correspond  à la ligne")
     void skuLigneCorrespondant() {
         String sku_value = "1234";
-        var entete = new EnteteAvisExpedition("avisExpe1");
+        var entete = new EnteteAvisExpedition(new IdExpedition("avisExpe1"));
         var sku = new Sku(sku_value);
         var lignes = List.of(new Marchandise(sku, 1));
         var avisExpedition = new AvisExpedition(entete, lignes);
@@ -97,7 +97,7 @@ public class ReceptionTest {
     @Test
     @DisplayName("cloturer Une Ligne avec une marchendise manquant")
     void cloturerUneLigne() {
-        var entete = new EnteteAvisExpedition("avisExpe1");
+        var entete = new EnteteAvisExpedition(new IdExpedition("avisExpe1"));
         var sku = new Sku("1234");
         var lignes = List.of(new Marchandise(sku, 1));
         var avisExpedition = new AvisExpedition(entete, lignes);
@@ -110,7 +110,7 @@ public class ReceptionTest {
     @Test
     @DisplayName("cloturer Une Ligne ")
     void cloturerUneLigneAvecSucces() {
-        var entete = new EnteteAvisExpedition("avisExpe1");
+        var entete = new EnteteAvisExpedition(new IdExpedition("avisExpe1"));
         var sku = new Sku("1234");
         var lignes = List.of(new Marchandise(sku, 1));
         var avisExpedition = new AvisExpedition(entete, lignes);
