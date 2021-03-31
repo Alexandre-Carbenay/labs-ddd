@@ -1,5 +1,6 @@
 package com.zenika.ddd.domain.reception;
 
+import com.zenika.ddd.domain.EventBus;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -22,14 +23,18 @@ public class CreerReceptionServiceTest {
     private AvisExpeditionGateway avisExpeditionGateway;
     @Mock
     private ReceptionRepository receptionRepository;
+    @Mock
+    private EventBus eventBus;
     @Captor
     private ArgumentCaptor<Reception> receptionCaptor;
+    @Captor
+    private ArgumentCaptor<ReceptionCreee> evenementCaptor;
 
     private CreerReceptionService service;
 
     @BeforeEach
     void setUp() {
-        service = new CreerReceptionService(avisExpeditionGateway, receptionRepository);
+        service = new CreerReceptionService(avisExpeditionGateway, receptionRepository, eventBus);
     }
 
     @Test
@@ -45,10 +50,12 @@ public class CreerReceptionServiceTest {
         service.creerAPartirDe(idExpedition);
 
         verify(receptionRepository).save(receptionCaptor.capture());
+        verify(eventBus).emit(evenementCaptor.capture());
         var actualReception = receptionCaptor.getValue();
         assertThat(actualReception.getAvisExpedition()).isEqualTo(avisExpedition);
         assertThat(actualReception.getStatut()).isEqualTo(OUVERTE);
         assertThat(actualReception.getLignesReception()).isEmpty();
+        assertThat(evenementCaptor.getValue().getReceptionId()).isEqualTo(actualReception.getReceptionId());
     }
 
 }

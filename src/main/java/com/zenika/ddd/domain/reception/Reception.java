@@ -18,6 +18,10 @@ public class Reception {
         this.lignesReception = new ArrayList<>();
     }
 
+    public ReceptionId getReceptionId() {
+        return receptionId;
+    }
+
     public AvisExpedition getAvisExpedition() {
         return avisExpedition;
     }
