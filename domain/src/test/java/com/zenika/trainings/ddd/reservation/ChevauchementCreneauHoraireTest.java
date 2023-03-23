@@ -37,8 +37,9 @@ class ChevauchementCreneauHoraireTest {
 
     @Test
     void creneauxHorairesSeSuivent() {
-        var creneauHoraireA = new CreneauHoraire(LocalDateTime.now(), LocalDateTime.now().plusMinutes(20));
-        var creneauHoraireB = new CreneauHoraire(LocalDateTime.now().plusMinutes(20), LocalDateTime.now().plusMinutes(50));
+        LocalDateTime now = LocalDateTime.now();
+        var creneauHoraireA = new CreneauHoraire(now, now.plusMinutes(20));
+        var creneauHoraireB = new CreneauHoraire(now.plusMinutes(20), now.plusMinutes(50));
 
         Assertions.assertThat(creneauHoraireA.chevauche(creneauHoraireB)).isFalse();
         Assertions.assertThat(creneauHoraireB.chevauche(creneauHoraireA)).isFalse();

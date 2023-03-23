@@ -14,7 +14,7 @@ public record CreneauHoraire(LocalDateTime debut, LocalDateTime fin) {
     }
 
     public boolean chevauche(CreneauHoraire autre) {
-        return !(this.fin.isBefore(autre.debut) || this.debut.isAfter(autre.fin));
+        return this.fin.isAfter(autre.debut) && this.debut.isBefore(autre.fin);
     }
 
 }
