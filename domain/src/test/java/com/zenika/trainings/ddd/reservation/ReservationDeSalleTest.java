@@ -5,20 +5,23 @@ import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
 
-public class ReservationFactoryTest {
+
+class ReservationDeSalleTest {
 
     @Test
-    public void reservationCorrectementInitialisee() {
+    public void verifierEvenementDeReservationAcceptee() {
+        ReservationDeSalle reservationDeSalle = new ReservationDeSalle();
+
         var referenceSalle = new ReferenceSalle("toto");
         var organisateur = new Organisateur("tutu");
         var creneauHoraire = new CreneauHoraire(LocalDateTime.now(), LocalDateTime.now().plusMinutes(45));
 
         var reserverSalle = new ReserverSalle(referenceSalle, creneauHoraire,organisateur);
-        var reservation = ReservationFactory.create(reserverSalle);
 
-        Assertions.assertThat(reservation.etat()).isEqualTo(EtatReservation.ACCEPTEE);
-        Assertions.assertThat(reservation.identifiant()).isNotNull();
+        var salleReservee = reservationDeSalle.reserverSalle(reserverSalle);
+
+        Assertions.assertThat(salleReservee).isNotNull();
+        Assertions.assertThat(salleReservee.identifiant()).isNotNull();
     }
-
 
 }

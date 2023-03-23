@@ -2,10 +2,10 @@ package com.zenika.trainings.ddd.reservation;
 
 public class Reservation {
 
-    public Reservation(IdentifiantReservation identifiant, Organisateur organisateur, Salle salle, CreneauHoraire creneauHoraire, EtatReservation etat) {
+    public Reservation(IdentifiantReservation identifiant, Organisateur organisateur, ReferenceSalle referenceSalle, CreneauHoraire creneauHoraire, EtatReservation etat) {
         this.identifiant = identifiant;
         this.organisateur = organisateur;
-        this.salle = salle;
+        this.referenceSalle = referenceSalle;
         this.creneauHoraire = creneauHoraire;
         this.etat = etat;
     }
@@ -14,7 +14,7 @@ public class Reservation {
 
     private Organisateur organisateur;
 
-    private Salle salle;
+    private ReferenceSalle referenceSalle;
 
     private CreneauHoraire  creneauHoraire;
 
