@@ -27,4 +27,8 @@ public class Reservation {
     public IdentifiantReservation identifiant() {
         return identifiant;
     }
+
+    public boolean estEnConflitAvec(Reservation reservation) {
+        return this.referenceSalle.equals(reservation.referenceSalle) && this.creneauHoraire.chevauche(reservation.creneauHoraire);
+    }
 }
